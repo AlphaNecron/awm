@@ -1,6 +1,6 @@
 from requests.models import HTTPError
 from beautifultable import BeautifulTable
-import math, sys, requests, htmllistparse
+import math, sys, requests, htmllistparse, os.path
 
 def conv(byte):
   if byte == 0:
@@ -40,5 +40,8 @@ def download(pkg):
   except HTTPError as err:
     print(err)
 
-if __name__ == "__main__" and len(sys.argv) == 2:
-  download(sys.argv[1])
+if __name__ == "__main__":
+  if len(sys.argv) == 2:
+    download(sys.argv[1])
+  else:
+    print("Usage: " + (os.path.basename(__file__) or "wayback_machine.py") + " package_name")
