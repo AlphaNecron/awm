@@ -1,6 +1,6 @@
 from requests.models import HTTPError
 from beautifultable import BeautifulTable
-import math, sys, requests, htmllistparse, os.path, time
+import math, sys, requests, htmllistparse, os.path, time, re
 
 def conv(byte):
   if byte == 0:
@@ -11,11 +11,21 @@ def conv(byte):
   s = round(byte / p, 2)
   return "%s %s" % (s, suff[i])
 
-def download(pkg):
+def find(pkg, ver):
   url = "https://archive.archlinux.org/packages/" + pkg[0] + "/" + pkg
   table = BeautifulTable()
   try:
     _, lst = htmllistparse.fetch_listing(url, timeout=30)
+    if not ver == "":
+      pattern = r"^{}-{}-(x86_64|i386|any).pkg.tar.(zst|xz|gz)$".format(pkg, ver)
+      files = list(filter(lambda x: re.match(pattern, x), map(lambda y: y.name, lst)))
+      if len(files) == 0:
+        print("Couldn't find package", pkg, "with version", ver)
+        return
+      for file in files:
+        print("Found file", file)
+        download(url + "/" + file, file)
+      return
     filtered = list(filter(lambda q: not q.name.endswith(".sig"), lst))
     limit = 0
     for file in filtered:
@@ -32,17 +42,29 @@ def download(pkg):
         print("Index must not exceed the limit or below zero.")
       else:
         index = int(temp)
-    target = filtered[index - 1]
-    print("Downloading", target.name)
-    r = requests.get(url + "/" + target.name)
-    with open(target.name, 'wb') as f:
-      f.write(r.content)
-      print("Downloaded", target.name, "to current working dir.")
+    target = filtered[index - 1].name
+    download(url + "/" + target, target)
   except HTTPError as err:
     print(err)
 
+def download(url, name):
+  try:
+    print("Downloading", name)
+    r = requests.get(url)
+    with open(name, 'wb') as f:
+      f.write(r.content)
+      print("Downloaded", name, "to current working dir.")
+  except PermissionError:
+    print("No permission to download.")
+  except HTTPError as hterr:
+    print("HTTP error", hterr)
+
 if __name__ == "__main__":
   if len(sys.argv) == 2:
-    download(sys.argv[1])
+    pkg = sys.argv[1].split('@')
+    if len(pkg) == 2:
+      find(pkg[0], pkg[1])
+    else:
+      find(pkg[0], "")
   else:
-    print("Usage:", os.path.basename(__file__) or "wayback_machine.py", "package_name")
+    print("Usage:", os.path.basename(__file__) or "wayback_machine.py", "package[@version]")
