@@ -8,9 +8,10 @@ pip install beautifultable htmllistparse
 
 ## Usage
 ```
-wayback_machine.py package_name
-                      ^^^^^
-                     required
+wayback_machine.py package[@version]
+                     ^^^     ^^^
+                  required  optional
+eg: wayback_machine.py neofetch@7.1.0-2
 ```
 
 ## Demo
