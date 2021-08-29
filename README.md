@@ -1,5 +1,5 @@
 # arch_wayback_machine
-Download historical Arch Linux packages with a command.
+Download historical Arch Linux packages with one command.
 
 ## Dependencies
 ```
