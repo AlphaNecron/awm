@@ -33,6 +33,7 @@ def download(pkg):
       else:
         index = int(temp)
     target = filtered[index - 1]
+    print("Downloading " + target.name)
     r = requests.get(url + "/" + target.name)
     with open(target.name, 'wb') as f:
       f.write(r.content)
