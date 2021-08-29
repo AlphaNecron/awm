@@ -1,6 +1,6 @@
 from requests.models import HTTPError
 from beautifultable import BeautifulTable
-import math, sys, requests, htmllistparse, os.path
+import math, sys, requests, htmllistparse, os.path, time
 
 def conv(byte):
   if byte == 0:
@@ -20,8 +20,8 @@ def download(pkg):
     limit = 0
     for file in filtered:
       limit += 1
-      table.rows.append([limit, file.name, conv(file.size)])
-    table.columns.header = ["index", "file", "size"]
+      table.rows.append([limit, file.name, time.strftime("%d/%m/%Y %H:%M:%S", file.modified), conv(file.size)])
+    table.columns.header = ["index", "file", "last modified", "size"]
     print(table)
     index = 0
     while index == 0:
@@ -33,11 +33,11 @@ def download(pkg):
       else:
         index = int(temp)
     target = filtered[index - 1]
-    print("Downloading " + target.name)
+    print("Downloading", target.name)
     r = requests.get(url + "/" + target.name)
     with open(target.name, 'wb') as f:
       f.write(r.content)
-      print("Downloaded " + target.name + " to current working dir.")
+      print("Downloaded", target.name, "to current working dir.")
   except HTTPError as err:
     print(err)
 
@@ -45,4 +45,4 @@ if __name__ == "__main__":
   if len(sys.argv) == 2:
     download(sys.argv[1])
   else:
-    print("Usage: " + (os.path.basename(__file__) or "wayback_machine.py") + " package_name")
+    print("Usage:", os.path.basename(__file__) or "wayback_machine.py", "package_name")
