@@ -23,7 +23,7 @@ def find(pkg, ver):
         print("Couldn't find package", pkg, "with version", ver)
         return
       for file in files:
-        print("Found file", file)
+        print("Found", file)
         download(url + "/" + file, file)
       return
     filtered = list(filter(lambda q: not q.name.endswith(".sig"), lst))
