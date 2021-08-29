@@ -14,4 +14,4 @@ wayback_machine.py package_name
 ```
 
 ## Demo
-[![asciicast](https://asciinema.org/a/432870.png)](https://asciinema.org/a/432870)
+[![asciicast](https://asciinema.org/a/432870.svg)](https://asciinema.org/a/432870)
