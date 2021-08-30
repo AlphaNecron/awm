@@ -8,10 +8,11 @@ pip install beautifultable htmllistparse
 
 ## Usage
 ```
-wayback_machine.py package[@version]
+wget https://raw.githubusercontent.com/AlphaNecron/arch_wayback_machine/master/wayback_machine.py
+python wayback_machine.py package[@version]
                      ^^^     ^^^
                   required  optional
-eg: wayback_machine.py neofetch@7.1.0-2
+eg: python wayback_machine.py neofetch@7.1.0-2
 ```
 
 ## Demo
