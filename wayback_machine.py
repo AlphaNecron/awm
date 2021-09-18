@@ -1,3 +1,4 @@
+#!/bin/python3
 from requests.models import HTTPError
 from beautifultable import BeautifulTable
 import math, sys, requests, htmllistparse, os.path, time, re
