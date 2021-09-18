@@ -55,7 +55,7 @@ def download(url, name):
     with open(name, 'wb') as f:
       f.write(r.content)
       print("Downloaded", name, "to current working dir.")
-      print("Please execute \"pacman -U {0}\" to install the package.").format(os.path.join(os.getcwd(), name))
+      print("Please execute \"pacman -U {0}\" as root to install the package.").format(os.path.join(os.getcwd(), name))
   except PermissionError:
     print("No permission to download.")
   except HTTPError as hterr:
