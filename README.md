@@ -10,7 +10,7 @@ pip install beautifultable htmllistparse
 ```bash
 curl -o awm https://raw.githubusercontent.com/AlphaNecron/arch_wayback_machine/master/wayback_machine.py
 sudo mv awm /usr/bin/awm
-chmod +x /usr/bin/awm
+sudo chmod +x /usr/bin/awm
 ```
 
 ## Usage
