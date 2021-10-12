@@ -1,4 +1,4 @@
-# arch_wayback_machine
+# awm
 Download historical Arch Linux packages with one command.
 
 ## Dependencies
@@ -8,7 +8,19 @@ pip install beautifultable htmllistparse
 
 ## Installation
 ```bash
-curl -o awm https://raw.githubusercontent.com/AlphaNecron/arch_wayback_machine/master/wayback_machine.py
+git clone https://github.com/AlphaNecron/awm
+cd awm
+# or
+mkdir awm
+cd awm
+curl https://raw.githubusercontent.com/AlphaNecron/awm/master/PKGBUILD
+# and then
+makepkg -sri
+```
+
+## Manual installation
+```bash
+curl -o awm https://raw.githubusercontent.com/AlphaNecron/awm/master/wayback_machine.py
 sudo mv awm /usr/bin/awm
 sudo chmod +x /usr/bin/awm
 ```
