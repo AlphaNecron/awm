@@ -11,7 +11,7 @@ license=('ISC')
 provides=($_pkgname)
 conflicts=($_pkgname)
 makedepends=('git')
-source=("git+https://github.com/AlphaNecron/arch_wayback_machine.git")
+source=("git+https://github.com/AlphaNecron/awm.git")
 md5sums=('SKIP')
 
 pkgver() {
