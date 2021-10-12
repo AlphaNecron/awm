@@ -13,7 +13,7 @@ cd awm
 # or
 mkdir awm
 cd awm
-curl https://raw.githubusercontent.com/AlphaNecron/awm/master/PKGBUILD
+curl https://raw.githubusercontent.com/AlphaNecron/awm/master/PKGBUILD -O
 # and then
 makepkg -sri
 ```
