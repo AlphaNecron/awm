@@ -1,5 +1,5 @@
 # awm
-Download historical Arch Linux packages with one command.
+Simple historical Arch Linux packages downloader.
 
 ## Dependencies
 ```
